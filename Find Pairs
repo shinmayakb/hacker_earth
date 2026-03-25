@@ -1,0 +1,33 @@
+\* Hacker Earth - Easy
+You are given an array of length N.
+Find the number of ordered pairs (i, j) such that:
+1 ≤ i, j ≤ N and i ≠ j and A[i] is divisible by A[j]
+*/
+
+#include <stdio.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    int arr[n];
+    for(int i = 0; i < n; i++){
+        scanf("%d", &arr[i]);
+    }
+
+    int count = 0;
+
+    // Check all ordered pairs
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+
+            if(i != j && arr[i] % arr[j] == 0){
+                count++;
+            }
+        }
+    }
+
+    printf("%d\n", count);
+
+    return 0;
+}
