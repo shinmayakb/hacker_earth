@@ -1,0 +1,61 @@
+\* Hacker Earth - Medium
+Alice, an aspiring cryptographer, recently discovered an ancient scroll containing a sequence of mysterious numbers. According to a legend, these numbers hold the key to unlocking a hidden treasure buried centuries ago by an enigmatic mathematician. However, deciphering the scroll requires identifying specific pairs of numbers that follow an ancient numerical pattern.
+
+Alice is given an array of integers nums. She wants to determine how many pairs exist such that:
+
+    \(0≤i
+    The sum of digits of nums[i] is equal to the sum of digits of nums[j].
+
+She believes that the correct count of these pairs will reveal a crucial clue needed to decode the next part of the scroll. Your task is to help Alice compute this number so she can continue her quest.
+
+Task
+
+Return the number of special pairs to assist Alice in uncovering the hidden secret.
+*/
+
+import java.io.*;
+import java.util.*;
+
+
+public class TestClass {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter wr = new PrintWriter(System.out);
+         int n = Integer.parseInt(br.readLine().trim());
+         String[] arr_nums = br.readLine().split(" ");
+         int[] nums = new int[n];
+         for(int i_nums = 0; i_nums < arr_nums.length; i_nums++)
+         {
+         	nums[i_nums] = Integer.parseInt(arr_nums[i_nums]);
+         }
+
+         long out_ = solve(n, nums);
+         System.out.println(out_);
+
+         wr.close();
+         br.close();
+    }
+static long solve(int n, int[] nums){
+    long result = 0;
+
+    HashMap<Integer, Long> map = new HashMap<>();
+
+    for(int num : nums){
+        int sum = 0;
+        int temp = num;
+
+        while(temp > 0){
+            sum += temp % 10;
+            temp /= 10;
+        }
+
+        map.put(sum, map.getOrDefault(sum, 0L) + 1);
+    }
+
+    for(long count : map.values()){
+        result += (count * (count - 1)) / 2;
+    }
+
+    return result;
+}
+}
