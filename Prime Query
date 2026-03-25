@@ -1,0 +1,59 @@
+\* Hacker rank - Medium
+You are given an array having integers and queries. Each query is described by two integers and . 
+For each query, find the number of pairs such that and can be expressed as the sum of one or more prime numbers.
+In the sum, you are allowed to use a prime number more than once.
+
+Input format
+    The first line of input contains an integer denoting the number of test cases.
+    The first line of each test case contains an integers .
+    The second line of each test case contains space-separated integers .
+    Then lines follow, each containing two space-separated integers and .
+
+Output format
+For each query, print the number of pairs that satisfies the given conditions in a separate line.
+*/
+
+
+#include <stdio.h>
+
+int main() {
+    int T;
+    scanf("%d", &T);
+
+    while (T--) {
+        int n;
+        scanf("%d", &n);
+
+        int arr[n];
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &arr[i]);
+        }
+
+        int q;
+        scanf("%d", &q);
+
+        while (q--) {
+            int l, r;
+            scanf("%d %d", &l, &r);
+
+            l--; r--; // 0-based index
+
+            int count = 0;
+
+            for (int i = l; i <= r; i++) {
+                for (int j = i + 1; j <= r; j++) {
+
+                    int sum = arr[i] + arr[j];
+
+                    if (sum >= 2) {
+                        count++;
+                    }
+                }
+            }
+
+            printf("%d\n", count);
+        }
+    }
+
+    return 0;
+}
