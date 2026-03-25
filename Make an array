@@ -41,12 +41,26 @@ public class TestClass {
          wr.close();
          br.close();
     }
-static int solve(int N, int[] A){
-    for(int i = 1; i < N; i++){
-        if(A[i] < A[i-1]){
-            return -1;
-        }
+    static int solve(int N, int[] A){
+    long sum = 0;
+    int max = 0;
+
+    for(int i = 0; i < N; i++){
+        sum += A[i];
+        max = Math.max(max, A[i]);
     }
-    return A[N-1];
+
+    if(sum % (N - 1) != 0){
+        return -1;
+    }
+
+    long x = sum / (N - 1);
+
+    if(x < max){
+        return -1;
+    }
+
+    return (int)x;
 }
+
 }
